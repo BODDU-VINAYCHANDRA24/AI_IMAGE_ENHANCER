@@ -1,0 +1,16 @@
+numpy
+opencv-python
+pillow
+flask
+torch
+torchvision
+realesrgan
+gfpgan
+basicsr
+moviepy
+tqdm
+ffmpeg-python
+scipy
+scikit-image
+imageio
+imageio-ffmpeg

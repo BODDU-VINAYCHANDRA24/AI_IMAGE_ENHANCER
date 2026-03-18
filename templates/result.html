@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Result</title>
+
+<style>
+
+body{
+background:#0f172a;
+color:white;
+text-align:center;
+font-family:Arial;
+}
+
+.container{
+position:relative;
+width:700px;
+margin:auto;
+}
+
+.container img{
+width:100%;
+}
+
+.after{
+position:absolute;
+top:0;
+left:0;
+width:50%;
+overflow:hidden;
+}
+
+.slider{
+width:700px;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+background:#22c55e;
+border:none;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Before vs After</h2>
+
+<div class="container">
+
+<img src="/static/uploads/{{ original }}">
+
+<div class="after" id="after">
+<img src="/static/outputs/{{ enhanced }}">
+</div>
+
+</div>
+
+<input type="range" min="0" max="100" value="50" class="slider" id="slider">
+
+<br>
+
+<a href="/static/outputs/{{ enhanced }}" download>
+<button>Download Enhanced File</button>
+</a>
+
+<script>
+
+const slider=document.getElementById("slider")
+const after=document.getElementById("after")
+
+slider.addEventListener("input",()=>{
+after.style.width=slider.value+"%"
+})
+
+</script>
+
+</body>
+</html>

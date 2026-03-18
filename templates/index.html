@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>AI Media Enhancer</title>
+
+<style>
+
+body{
+background:#0f172a;
+color:white;
+text-align:center;
+font-family:Arial;
+}
+
+.drop-area{
+width:500px;
+height:200px;
+border:2px dashed #3b82f6;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+cursor:pointer;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+background:#22c55e;
+border:none;
+color:white;
+font-size:16px;
+}
+
+#loader{
+display:none;
+margin-top:20px;
+}
+
+.progress{
+width:300px;
+background:#333;
+margin:auto;
+border-radius:5px;
+}
+
+.bar{
+height:20px;
+width:0%;
+background:#22c55e;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>AI Image & Video Enhancer</h2>
+
+<form action="/upload" method="post" enctype="multipart/form-data" onsubmit="showLoader()">
+
+<div class="drop-area" onclick="fileElem.click()">
+Drag & Drop Image or Video
+<input type="file" name="file" id="fileElem" hidden>
+</div>
+
+<button type="submit">Enhance</button>
+
+</form>
+
+<div id="loader">
+
+<p>Processing your file...</p>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<p id="percent">0%</p>
+
+</div>
+
+<script>
+
+function showLoader(){
+
+document.getElementById("loader").style.display="block"
+
+const interval = setInterval(()=>{
+
+fetch("/progress")
+.then(res=>res.json())
+.then(data=>{
+
+const val = data.value
+
+document.getElementById("bar").style.width = val + "%"
+document.getElementById("percent").innerText = val + "%"
+
+if(val >= 100){
+clearInterval(interval)
+}
+
+})
+
+},1000)
+
+}
+
+</script>
+
+</body>
+</html>
